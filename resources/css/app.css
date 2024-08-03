@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --text-primary: #4a5568; /* gray-700 */
+  --bg-primary: #f7fafc; /* gray-100 */
+}
+
+.dark {
+  --text-primary: #d1d5db; /* gray-300 */
+  --bg-primary: #0f0f11; /* gray-800 */
+}
