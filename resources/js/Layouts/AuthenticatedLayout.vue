@@ -6,6 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import ColorMode from '@/Components/ColorMode.vue';
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -34,8 +35,9 @@ const showingNavigationDropdown = ref(false);
                 </NavLink>
               </div>
             </div>
-
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+              <!-- Color Mode Switch -->
+              <ColorMode />
               <!-- Settings Dropdown -->
               <div class="ms-3 relative">
                 <Dropdown align="right" width="48">
@@ -116,7 +118,11 @@ const showingNavigationDropdown = ref(false);
               Dashboard
             </ResponsiveNavLink>
           </div>
-
+          
+          <!-- Color Mode Switch -->
+          <ColorMode />
+          
+          
           <!-- Responsive Settings Options -->
           <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">

@@ -9,6 +9,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^8.0.0",
+        "@iconify/vue": "^4.1.2",
         "@inertiajs/vue3": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^5.0.0",
@@ -32,6 +33,10 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.22",
         "@heroicons/vue": "^2.1.5",
+        "@iconify/tailwind": "^1.1.2",
+        "@vueuse/components": "^10.11.0",
+        "@vueuse/core": "^10.11.0",
+        "@vueuse/shared": "^10.11.0",
         "daisyui": "^4.12.10",
         "prime": "^0.5.0",
         "unplugin-vue-markdown": "^0.26.2",
