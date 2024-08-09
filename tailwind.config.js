@@ -19,9 +19,16 @@ export default {
             colors: {
                 'text-primary': 'var(--text-primary)',
                 'bg-primary': 'var(--bg-primary)',
+                'accent': 'var(--accent)',
+                'border': 'var(--border)',
+                'icon': 'var(--icon)',
+                'icon-hover': 'var(--icon-hover)',
             }
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('tailwind-scrollbar')
+    ],
 };

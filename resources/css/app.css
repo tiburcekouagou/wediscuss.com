@@ -5,9 +5,17 @@
 :root {
   --text-primary: #4a5568; /* gray-700 */
   --bg-primary: #f7fafc; /* gray-100 */
+  --accent: #d6e4f3;
+  --border: #9ca3af;
+  --icon: #9ca3af;
+  --icon-hover: #181b21;
 }
 
 .dark {
-  --text-primary: #d1d5db; /* gray-300 */
+  --text-primary: #bcbcbc; /* gray-300 */
   --bg-primary: #0f0f11; /* gray-800 */
+  --accent: #1c1c23;
+  --border: #4a5568 ;
+  --icon: #9ca3af;
+  --icon-hover: #e5e7eb;
 }

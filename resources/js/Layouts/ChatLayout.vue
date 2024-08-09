@@ -1,21 +1,42 @@
 <template>
-  <div>
-    <!-- Navbar Gauche -->
-    Chat Layout
-    <pre>{{ onlineUsersObj }}</pre>
+  <div class="flex-1 flex overflow-hidden">
+    <!-- Sidebar -->
+    <div class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden">
+      <!-- En-Tête fixe -->
+      <div class="flex flex-col">
+        <div class="flex items-center justify-between py-2 px-3 font-medium sticky top-0 z-10">
+          Conversations
+          <button title="Créer un groupe" class="text-icon hover:text-icon-hover">
+            <Icon class="h-5 w-5" icon="heroicons:pencil-square" />
+          </button>
+        </div>
+        <div class="p-3 border-b border-border sticky top-[3rem] z-10">
+          <TextInput v-model="search" class="w-full"  />
+        </div>
+      </div>
+      <!-- Liste des conversations -->
+      <div class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full">
+      </div>
+    </div>
     <!-- Zone d'affichage des messages -->
+    <div class="flex-1">Messages</div>
   </div>
 </template>
 
 <script setup lang="ts">
 // imports
-import { User } from '@/types';
+import TextInput from '@/Components/TextInput.vue';
+import { Conversation, User } from '@/types';
+import { usePage } from '@inertiajs/vue3';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import {Icon} from '@iconify/vue'
 
 // Données partagées
+const page = usePage();
 
 // Données réactives de gestion des conversations
-
+const conversations = ref<Conversation[]>(page.props.conversations);
+const search = ref<string>('');
 // Utilisateurs connectés
 const onlineUsersObj = ref<Record<string, User>>({});
 

@@ -14,4 +14,33 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
   auth: {
     user: User;
   };
+  conversations: Conversation[];
 };
+
+export interface UserInfo extends User {
+  blocked_at:        null;
+  email_verified_at: Date;
+  pivot:             Pivot;
+}
+
+export interface Conversation {
+  id:                number;
+  name:              string;
+  is_group:          boolean;
+  is_user?:          boolean;
+  is_admin?:         number;
+  created_at:        Date;
+  updated_at:        Date;
+  blocked_at?:       null;
+  last_message:      null | string;
+  last_message_date: Date | null;
+  description?:      string;
+  owner_id?:         number;
+  users?:            UserInfo[];
+  user_ids?:         number[];
+}
+
+export interface Pivot {
+  group_id: number;
+  user_id:  number;
+}
