@@ -19,21 +19,22 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 
 export interface UserInfo extends User {
   blocked_at:        null;
-  email_verified_at: Date;
+  email_verified_at: string;
   pivot:             Pivot;
 }
 
 export interface Conversation {
   id:                number;
   name:              string;
+  email?:              string;
   is_group:          boolean;
   is_user?:          boolean;
   is_admin?:         number;
-  created_at:        Date;
-  updated_at:        Date;
+  created_at:        string;
+  updated_at:        string;
   blocked_at?:       null;
   last_message:      null | string;
-  last_message_date: Date | null;
+  last_message_date: string | null;
   description?:      string;
   owner_id?:         number;
   users?:            UserInfo[];

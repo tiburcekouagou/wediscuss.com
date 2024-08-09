@@ -13,9 +13,9 @@
 
 .dark {
   --text-primary: #bcbcbc; /* gray-300 */
-  --bg-primary: #0f0f11; /* gray-800 */
-  --accent: #1c1c23;
-  --border: #4a5568 ;
+  --bg-primary: #02021f; /* gray-800 */
+  --accent: #17171c;
+  --border: #35445f ;
   --icon: #9ca3af;
   --icon-hover: #e5e7eb;
 }
