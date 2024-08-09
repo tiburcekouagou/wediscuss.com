@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -9,6 +9,7 @@ import { Link } from '@inertiajs/vue3';
 import ColorMode from '@/Components/ColorMode.vue';
 
 const showingNavigationDropdown = ref(false);
+
 </script>
 
 <template>

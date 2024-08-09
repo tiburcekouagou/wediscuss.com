@@ -9,15 +9,14 @@ defineProps<{
   mustVerifyEmail?: boolean;
   status?: string;
 }>();
+
+defineOptions({layout: AuthenticatedLayout})
 </script>
 
 <template>
-  <Head title="Profile" />
+  <div>
+    <Head title="Profile" />
 
-  <AuthenticatedLayout>
-    <template #header>
-      <h2 class="font-semibold text-xl  dark: leading-tight">Profile</h2>
-    </template>
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -38,5 +37,5 @@ defineProps<{
         </div>
       </div>
     </div>
-  </AuthenticatedLayout>
+  </div>
 </template>
