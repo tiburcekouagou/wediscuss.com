@@ -7,7 +7,7 @@ import Echo from 'laravel-echo';
 declare global {
   interface Window {
     axios: AxiosInstance;
-    Echo: Echo
+    Echo: Echo;
   }
 
   var route: typeof ziggyRoute;

@@ -21,11 +21,9 @@ const form = useForm({
 <template>
   <section>
     <header>
-      <h2 class="text-lg font-medium  dark: ">Profile Information</h2>
+      <h2 class="text-lg font-medium dark:">Profile Information</h2>
 
-      <p class="mt-1 text-sm  dark: ">
-        Update your account's profile information and email address.
-      </p>
+      <p class="mt-1 text-sm dark:">Update your account's profile information and email address.</p>
     </header>
 
     <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
@@ -61,13 +59,13 @@ const form = useForm({
       </div>
 
       <div v-if="mustVerifyEmail && user.email_verified_at === null">
-        <p class="text-sm mt-2  dark: ">
+        <p class="text-sm mt-2 dark:">
           Your email address is unverified.
           <Link
             :href="route('verification.send')"
             method="post"
             as="button"
-            class="underline text-sm  dark: hover: dark:hover: rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            class="underline text-sm dark: hover: dark:hover: rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
           >
             Click here to re-send the verification email.
           </Link>
@@ -90,9 +88,7 @@ const form = useForm({
           leave-active-class="transition ease-in-out"
           leave-to-class="opacity-0"
         >
-          <p v-if="form.recentlySuccessful" class="text-sm  dark: ">
-            Saved.
-          </p>
+          <p v-if="form.recentlySuccessful" class="text-sm dark:">Saved.</p>
         </Transition>
       </div>
     </form>
