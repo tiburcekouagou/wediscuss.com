@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * 
@@ -84,6 +85,22 @@ class Conversation extends Model
     {
         // Établit la relation en utilisant la clé étrangère 'user_id2' pour le deuxième utilisateur
         return $this->belongsTo(User::class, 'user_id2');
+    }
+
+    /**
+     * Fonction qui récupère toutes les conversations associées à l'utilisateur connecté
+     */
+    public static function getConversationsForSidebar(User $user) {
+        // récupérer tous les utilisateurs autre que celui connecté
+        $users = User::getUsersExcept($user);
+        // récupérer tous les groupes auxquels l'utilisateur connecté appartient
+        $groups = Group::getGroupsExcept($user);
+        // renvoyer toutes les conversations que l'utilisateur a effectué avec les utilisateurs et les groupes
+        return $users->map(function (User $user) {
+            return $user->toConversationArray();
+        })->concat($groups->map(function (Group $group) {
+            return $group->toConversationArray();
+        }));
     }
 
 }
