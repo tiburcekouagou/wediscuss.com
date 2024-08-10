@@ -1,7 +1,7 @@
 <template>
   <Link href="#" class="flex items-center gap-2 p-2 ">
     <!-- Avatar de profil pour les users simples -->
-    <UserAvatar :avatar="conversation.avatar" :name="conversation.name" v-if="conversation.is_user" />
+    <UserAvatar :avatar="conversation.avatar" :name="conversation.name" :isOnline="isOnline" v-if="conversation.is_user" />
     <!-- Avatar de profile pour les groupes -->
     <GroupAvatar  v-if="conversation.is_group"/>
     <div class="flex-1 max-w-full overflow-hidden text-xs">
@@ -26,6 +26,7 @@ const page = usePage();
 
 const props = defineProps<{
   conversation: Conversation;
+  isOnline: boolean;
 }>();
 
 const currentUser = page.props.auth.user;
