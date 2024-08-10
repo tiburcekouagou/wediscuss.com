@@ -1,7 +1,9 @@
 <template>
   <div class="flex-1 flex overflow-hidden">
     <!-- Sidebar -->
-    <div class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden">
+    <div
+      class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden"
+    >
       <!-- En-Tête fixe -->
       <div class="flex flex-col">
         <div class="flex items-center justify-between py-2 px-3 font-medium sticky top-0 z-10">
@@ -16,17 +18,18 @@
       </div>
       <!-- Liste des conversations -->
       <div
-        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full">
+        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full"
+      >
         <ConversationItem
-         v-for="conversation in filteredConversations" 
-         :key="conversation.is_group ? `group_${conversation.id}` : `user_${conversation.id}`"
-         :conversation="conversation"
-          />
-
+          v-for="conversation in filteredConversations"
+          :key="conversation.is_group ? `group_${conversation.id}` : `user_${conversation.id}`"
+          :conversation="conversation"
+        />
       </div>
     </div>
     <!-- Zone d'affichage des messages -->
-    <div class="flex-1">Messages
+    <div class="flex-1">
+      Messages
       <!-- Item de conversation pour chaque conversation -->
     </div>
   </div>
@@ -38,7 +41,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Conversation, User } from '@/types';
 import { usePage } from '@inertiajs/vue3';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
 import ConversationItem from '@/Components/Chat/ConversationItem.vue';
 // Données partagées
 const page = usePage();
@@ -70,13 +73,16 @@ const sortedConversations = computed<Conversation[]>(() => {
       return 0;
     }
   });
-})
+});
 
 const filteredConversations = computed<Conversation[]>(() => {
   return sortedConversations.value.filter((conversation) => {
     const searchTerm = search.value.toLocaleLowerCase();
-    return conversation.name.toLowerCase().includes(searchTerm) || conversation.email?.toLowerCase().includes(searchTerm)
-  })
+    return (
+      conversation.name.toLowerCase().includes(searchTerm) ||
+      conversation.email?.toLowerCase().includes(searchTerm)
+    );
+  });
 });
 // Utilisateurs connectés
 const onlineUsersObj = ref<Record<string, User>>({});
