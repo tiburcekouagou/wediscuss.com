@@ -1,7 +1,9 @@
 <template>
   <div class="flex-1 flex overflow-hidden">
     <!-- Sidebar -->
-    <div class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden">
+    <div
+      class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden"
+    >
       <!-- En-Tête fixe -->
       <div class="flex flex-col">
         <div class="flex items-center justify-between py-2 px-3 font-medium sticky top-0 z-10">
@@ -16,17 +18,18 @@
       </div>
       <!-- Liste des conversations -->
       <div
-        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full">
-        <ConversationItem 
-        v-for="conversation in filteredConversations"
+        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full"
+      >
+        <ConversationItem
+          v-for="conversation in filteredConversations"
           :key="conversation.is_group ? `group_${conversation.id}` : `user_${conversation.id}`"
           :conversation="conversation"
           :isOnline="isUserOnline(conversation.id.toString())"
-           />
+        />
       </div>
     </div>
     <!-- Zone d'affichage des messages -->
-    <div class="flex-1">
+    <div class="flex-1 flex flex-col overflow-hidden">
       Messages
       <!-- Item de conversation pour chaque conversation -->
     </div>
