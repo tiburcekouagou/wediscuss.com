@@ -26,6 +26,7 @@ export interface UserInfo extends User {
 export interface Conversation {
   id: number;
   name: string;
+  avatar: string;
   email?: string;
   is_group: boolean;
   is_user?: boolean;

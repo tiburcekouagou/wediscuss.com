@@ -153,6 +153,7 @@ class User extends Authenticatable
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'avatar' => $this->avatar,
             'email' => $this->email,
             'is_group' => false,
             'is_user' => true,

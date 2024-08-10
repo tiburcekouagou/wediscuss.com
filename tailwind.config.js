@@ -29,6 +29,7 @@ export default {
 
     plugins: [
         forms,
-        require('tailwind-scrollbar')
+        require('tailwind-scrollbar'),
+        require('daisyui')
     ],
 };
