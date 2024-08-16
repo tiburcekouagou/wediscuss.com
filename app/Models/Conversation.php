@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -90,7 +91,8 @@ class Conversation extends Model
     /**
      * Fonction qui récupère toutes les conversations associées à l'utilisateur connecté
      */
-    public static function getConversationsForSidebar(User $user) {
+    public static function getConversationsForSidebar(User $user)
+    {
         // récupérer tous les utilisateurs autre que celui connecté
         $users = User::getUsersExcept($user);
         // récupérer tous les groupes auxquels l'utilisateur connecté appartient
@@ -101,6 +103,36 @@ class Conversation extends Model
         })->concat($groups->map(function (Group $group) {
             return $group->toConversationArray();
         }));
+    }
+
+    /**
+     * Trouve les conversations entre 2 utilisateurs puis m-à-j la colonne "last_message_id"
+     * @param int $user_id1
+     * @param int $user_id2
+     * @param \App\Models\Message|\Illuminate\Database\Eloquent\TModel $message
+     * @return void
+     */
+    public static function updateConversationWithMessage($user_id1, $user_id2, $message)
+    {
+        $conversation = Conversation::where(function ($query) use ($user_id1, $user_id2) {
+            $query->where('user_id1', $user_id1)
+                ->where('user_id2', $user_id2);
+        })->orWhere(function ($query) use ($user_id1, $user_id2) {
+            $query->where('user_id1', $user_id2)
+                ->where('user_id2', $user_id1);
+        })->first();
+
+        if ($conversation) {
+            $conversation->update([
+                'last_message_id' => $message->id
+            ]);
+        } else {
+            Conversation::create([
+                'user_id1' => $user_id1,
+                'user_id2' => $user_id2,
+                'last_message_id' => $message->id,
+            ]);
+        }
     }
 
 }
