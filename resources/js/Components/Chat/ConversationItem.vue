@@ -1,10 +1,13 @@
 <template>
   <div class="flex justify-center">
-    <Link 
-    :href="conversation.is_user 
-    ? route('chat.user', conversation.id) 
-    : route('chat.group', conversation.id)" 
-    class="w-full inline-flex items-center gap-2 p-2 hover:bg-slate-400/30 transition-all">
+    <Link
+      :href="
+        conversation.is_user
+          ? route('chat.user', conversation.id)
+          : route('chat.group', conversation.id)
+      "
+      class="w-full inline-flex items-center gap-2 p-2 hover:bg-slate-400/30 transition-all"
+    >
       <!-- Avatar de profil pour les users simples -->
       <UserAvatar
         :avatar="conversation.avatar"
@@ -19,7 +22,10 @@
           <h3 class="font-semibold text-sm text-nowrap text-ellipsis truncate">
             {{ conversation.name }}
           </h3>
-          <span v-if="conversation.last_message_date" class="text-nowrap text-ellipsis truncate italic">
+          <span
+            v-if="conversation.last_message_date"
+            class="text-nowrap text-ellipsis truncate italic"
+          >
             {{ conversation.last_message_date }}
           </span>
         </div>

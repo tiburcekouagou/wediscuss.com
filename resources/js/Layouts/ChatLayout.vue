@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <div
       class="transition-all w-full sm:w-[220px] md:w-[320px] bg-surface text-on-surface flex flex-col overflow-hidden"
-      :class="{'-ml-[100%] sm:ml-0': selectedConversation}"
+      :class="{ '-ml-[100%] sm:ml-0': selectedConversation }"
     >
       <!-- En-Tête fixe -->
       <div class="flex flex-col">
