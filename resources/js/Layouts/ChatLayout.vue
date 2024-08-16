@@ -3,6 +3,7 @@
     <!-- Sidebar -->
     <div
       class="transition-all w-full sm:w-[220px] md:w-[320px] bg-accent flex flex-col overflow-hidden"
+      :class="{'-ml-[100%] sm:ml-0': selectedConversation}"
     >
       <!-- En-Tête fixe -->
       <div class="flex flex-col">
@@ -13,7 +14,7 @@
           </button>
         </div>
         <div class="p-3 border-b border-border sticky top-[3rem] z-10">
-          <TextInput v-model="search" class="w-full" />
+          <TextInput v-model="search" class="w-full" placeholder="Rechercher un ami ou un groupe" />
         </div>
       </div>
       <!-- Liste des conversations -->
@@ -85,6 +86,10 @@ const filteredConversations = computed<Conversation[]>(() => {
     );
   });
 });
+
+// conversation sélectionnée
+const selectedConversation = ref<any>();
+
 // Utilisateurs connectés
 const onlineUsersObj = ref<Record<string, User>>({});
 
