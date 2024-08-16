@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -8,6 +10,9 @@ use App\Http\Controllers\ProfileController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('dashboard');
+
+    Route::post('/user/block/{id}', [UserController::class, 'blockUser'])->name('user.block');
+    Route::post('/user/unblock/{id}', [UserController::class, 'unblockUser'])->name('user.unblock');
 });
 
 Route::middleware('auth')->group(function () {
