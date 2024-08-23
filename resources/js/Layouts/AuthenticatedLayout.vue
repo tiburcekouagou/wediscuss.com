@@ -10,9 +10,9 @@ import ColorMode from '@/Components/ColorMode.vue';
 
 const showingNavigationDropdown = ref(false);
 
-const navRef = ref<HTMLElement|null>(null);
-const headerRef = ref<HTMLElement|null>(null);
-const mainRef = ref<HTMLElement|null>(null);
+const navRef = ref<HTMLElement | null>(null);
+const headerRef = ref<HTMLElement | null>(null);
+const mainRef = ref<HTMLElement | null>(null);
 
 function setMainHeight() {
   const navHeight = navRef.value ? navRef.value.offsetHeight : 0;
@@ -28,11 +28,11 @@ function setMainHeight() {
 onMounted(() => {
   setMainHeight();
   window.addEventListener('resize', setMainHeight);
-})
+});
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', setMainHeight);
-})
+});
 </script>
 
 <template>

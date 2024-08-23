@@ -26,15 +26,15 @@ export interface Messages {
 }
 
 export interface MessageData {
-    id:          number;
-    message:     string;
-    sender_id:   number;
-    sender:      User;
-    receiver_id?: number;
-    group_id?:    number;
-    attachments?: MessageAttachment[];
-    created_at:  Date;
-    updated_at:  Date;
+  id: number;
+  message: string;
+  sender_id: number;
+  sender: User;
+  receiver_id?: number;
+  group_id?: number;
+  attachments?: MessageAttachment[];
+  created_at: Date;
+  updated_at: Date;
 }
 export interface MessageLink {
   first: string;

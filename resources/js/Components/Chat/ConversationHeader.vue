@@ -1,11 +1,11 @@
 <template>
-    <div v-if="selectedConversation" class="p-3 flex justify-center items-center border-b">
-        <div class="flex items-center gap-3">
-            <Link :href="route('dashboard')" class="inline-block sm:hidden">
-                <Icon icon="heroicons:arrow-left-circle" class="w-6 h-6" />
-            </Link>
+  <div v-if="selectedConversation" class="p-3 flex justify-center items-center border-b">
+    <div class="flex items-center gap-3">
+      <Link :href="route('dashboard')" class="inline-block sm:hidden">
+        <Icon icon="heroicons:arrow-left-circle" class="w-6 h-6" />
+      </Link>
 
-            <UserAvatar
+      <UserAvatar
         :avatar="selectedConversation.avatar"
         :name="selectedConversation.name"
         :isOnline="false"
@@ -17,9 +17,8 @@
         <h3>{{ selectedConversation.name }}</h3>
         <p v-if="selectedConversation.is_group">{{ selectedConversation.users?.length }} membres</p>
       </div>
-
-        </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,7 +29,7 @@ import UserAvatar from './UserAvatar.vue';
 import GroupAvatar from './GroupAvatar.vue';
 
 const props = defineProps<{
-    selectedConversation: Conversation;
+  selectedConversation: Conversation;
 }>();
 </script>
 
