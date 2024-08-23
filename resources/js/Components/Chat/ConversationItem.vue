@@ -26,7 +26,7 @@
             v-if="conversation.last_message_date"
             class="text-nowrap text-ellipsis truncate italic"
           >
-            {{ conversation.last_message_date }}
+            {{ formatMessageDate(conversation.last_message_date) }}
           </span>
         </div>
         <p
@@ -47,6 +47,7 @@ import { Link, usePage } from '@inertiajs/vue3';
 import UserAvatar from './UserAvatar.vue';
 import GroupAvatar from './GroupAvatar.vue';
 import UserOptionsDropdown from './UserOptionsDropdown.vue';
+import { formatMessageDate } from '@/utils';
 
 const page = usePage();
 

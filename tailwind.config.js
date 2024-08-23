@@ -71,8 +71,17 @@ export default {
         'custom-color-color-container': 'var(--md-extended-color-custom-color-color-container)',
         'custom-color-on-color-container':
           'var(--md-extended-color-custom-color-on-color-container)'
+      },
+      screens: {
+        'xs': '428px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       }
-    }
+    },
+    
   },
 
   plugins: [forms, require('tailwind-scrollbar'), require('daisyui')]

@@ -1,8 +1,8 @@
 <template>
-  <div class="flex-1 flex overflow-hidden">
+  <div class="h-full flex-1 flex overflow-hidden">
     <!-- Sidebar -->
     <div
-      class="transition-all w-full sm:w-[220px] md:w-[320px] bg-surface text-on-surface flex flex-col overflow-hidden"
+      class="transition-all duration-300 w-full sm:w-[220px] md:w-[320px] bg-surface text-on-surface flex flex-col overflow-hidden"
       :class="{ '-ml-[100%] sm:ml-0': selectedConversation }"
     >
       <!-- En-Tête fixe -->
@@ -88,7 +88,7 @@ const filteredConversations = computed<Conversation[]>(() => {
 });
 
 // conversation sélectionnée
-const selectedConversation = ref<any>();
+const selectedConversation = page.props.selectedConversation;
 
 // Utilisateurs connectés
 const onlineUsersObj = ref<Record<string, User>>({});
