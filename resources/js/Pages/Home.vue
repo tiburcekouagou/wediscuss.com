@@ -35,10 +35,12 @@ import { usePage } from '@inertiajs/vue3';
 import ConversationHeader from '@/Components/Chat/ConversationHeader.vue';
 import MessageInput from '@/Components/Chat/MessageInput.vue';
 import MessageItem from '@/Components/Chat/MessageItem.vue';
+import { useConversations } from '@/composables/useConversations';
 
 defineOptions({ layout: AuthenticatedLayout });
 
 const page = usePage();
+
 
 const selectedConversation = page.props.selectedConversation;
 const messagesData = page.props.messages;

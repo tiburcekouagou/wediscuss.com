@@ -39,6 +39,7 @@
         "@vueuse/core": "^10.11.0",
         "@vueuse/shared": "^10.11.0",
         "daisyui": "^4.12.10",
+        "pinia": "^2.2.2",
         "prime": "^0.5.0",
         "unplugin-vue-markdown": "^0.26.2",
         "uuid": "^10.0.0",

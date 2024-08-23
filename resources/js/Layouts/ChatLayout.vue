@@ -3,8 +3,7 @@
     <!-- Sidebar -->
     <div
       class="transition-all duration-300 w-full sm:w-[220px] md:w-[320px] bg-surface text-on-surface flex flex-col overflow-hidden"
-      :class="{ '-ml-[100%] sm:ml-0': selectedConversation }"
-    >
+      :class="{ '-ml-[100%] sm:ml-0': selectedConversation }">
       <!-- En-Tête fixe -->
       <div class="flex flex-col">
         <div class="flex items-center justify-between py-2 px-3 font-medium sticky top-0 z-10">
@@ -14,24 +13,16 @@
           </button>
         </div>
         <div class="p-3 border-b border-secondary sticky top-[3rem] z-10">
-          <TextInput
-            v-model="searchTerm"
-            @input="setSearch(searchTerm)"
-            class="w-full"
-            placeholder="Rechercher un ami ou un groupe"
-          />
+          <TextInput v-model="searchTerm" @input="setSearch(searchTerm)" class="w-full"
+            placeholder="Rechercher un ami ou un groupe" />
         </div>
       </div>
       <!-- Liste des conversations -->
       <div
-        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full"
-      >
-        <ConversationItem
-          v-for="conversation in filteredConversations"
+        class="flex-1 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-auto px-3 h-full">
+        <ConversationItem v-for="conversation in filteredConversations"
           :key="conversation.is_group ? `group_${conversation.id}` : `user_${conversation.id}`"
-          :conversation="conversation"
-          :isOnline="isUserOnline(conversation.id.toString())"
-        />
+          :conversation="conversation" :isOnline="isUserOnline(conversation.id.toString())" />
       </div>
     </div>
     <!-- Zone d'affichage des messages -->
@@ -51,23 +42,22 @@ import { Icon } from '@iconify/vue';
 import ConversationItem from '@/Components/Chat/ConversationItem.vue';
 import { useOnlineUsers } from '@/composables/useOnlineUsers';
 import { useConversations } from '@/composables/useConversations';
+import { useConversationStore } from '@/store/conversationStore';
+import { storeToRefs } from 'pinia';
 // Données partagées
 const page = usePage();
-const {
-  selectedConversation,
-  filteredConversations,
-  setConversations,
-  setSelectedConversation,
-  setSearch
-} = useConversations();
+const conversationStore = useConversationStore();
+
+const { selectedConversation, filteredConversations } = storeToRefs(conversationStore)
+const { setConversations, setSelectedConversation, setSearch } = conversationStore
 
 onMounted(() => {
-  setSelectedConversation(page.props.selectedConversation);
-  setConversations(page.props.conversations);
-});
+  setSelectedConversation(page.props.selectedConversation)
+  setConversations(page.props.conversations)
+})
 
 const { isUserOnline } = useOnlineUsers();
-const searchTerm = ref('');
+const searchTerm = ref("")
 </script>
 
 <style scoped></style>
