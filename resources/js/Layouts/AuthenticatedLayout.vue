@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -9,11 +9,35 @@ import { Link } from '@inertiajs/vue3';
 import ColorMode from '@/Components/ColorMode.vue';
 
 const showingNavigationDropdown = ref(false);
+
+const navRef = ref<HTMLElement|null>(null);
+const headerRef = ref<HTMLElement|null>(null);
+const mainRef = ref<HTMLElement|null>(null);
+
+function setMainHeight() {
+  const navHeight = navRef.value ? navRef.value.offsetHeight : 0;
+  const headerHeight = headerRef.value ? headerRef.value.offsetHeight : 0;
+  const viewportHeight = window.innerHeight;
+  const mainHeight = viewportHeight - navHeight - headerHeight;
+
+  if (mainRef.value) {
+    mainRef.value.style.height = `${mainHeight}px`;
+  }
+}
+
+onMounted(() => {
+  setMainHeight();
+  window.addEventListener('resize', setMainHeight);
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', setMainHeight);
+})
 </script>
 
 <template>
   <div class="h-screen flex flex-col">
-    <nav class="border-b border-primary bg-primary text-on-primary">
+    <nav ref="navRef" class="border-b border-primary bg-primary text-on-primary">
       <!-- Primary Navigation Menu -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -139,14 +163,14 @@ const showingNavigationDropdown = ref(false);
     </nav>
 
     <!-- Page Heading -->
-    <header class="shadow" v-if="$slots.header">
+    <header ref="headerRef" class="shadow" v-if="$slots.header">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <slot name="header" />
       </div>
     </header>
 
     <!-- Page Content -->
-    <main class="flex-1 max-h-full flex">
+    <main ref="mainRef" class="flex-1 w-full h-full">
       <slot />
     </main>
   </div>
