@@ -14,7 +14,12 @@
           </button>
         </div>
         <div class="p-3 border-b border-secondary sticky top-[3rem] z-10">
-          <TextInput v-model="search" class="w-full" placeholder="Rechercher un ami ou un groupe" />
+          <TextInput
+            v-model="searchTerm"
+            @input="setSearch(searchTerm)"
+            class="w-full"
+            placeholder="Rechercher un ami ou un groupe"
+          />
         </div>
       </div>
       <!-- Liste des conversations -->
@@ -40,93 +45,29 @@
 <script setup lang="ts">
 // imports
 import TextInput from '@/Components/TextInput.vue';
-import { Conversation, User } from '@/types';
 import { usePage } from '@inertiajs/vue3';
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import ConversationItem from '@/Components/Chat/ConversationItem.vue';
+import { useOnlineUsers } from '@/composables/useOnlineUsers';
+import { useConversations } from '@/composables/useConversations';
 // Données partagées
 const page = usePage();
+const {
+  selectedConversation,
+  filteredConversations,
+  setConversations,
+  setSelectedConversation,
+  setSearch
+} = useConversations();
 
-// Données réactives de gestion des conversations
-const conversations = ref<Conversation[]>(page.props.conversations);
-const localConversations = computed<Conversation[]>(() => conversations.value);
-const search = ref<string>('');
-
-const sortedConversations = computed<Conversation[]>(() => {
-  return localConversations.value.sort((a, b) => {
-    // on recherche les personnes bloquées d'abord
-    if (a.blocked_at && b.blocked_at) {
-      return a.blocked_at > b.blocked_at ? 1 : -1;
-    } else if (a.blocked_at) {
-      return 1;
-    } else if (b.blocked_at) {
-      return -1;
-    }
-
-    // on recherche en fonction de la date du message
-    if (a.last_message_date && b.last_message_date) {
-      return b.last_message_date.localeCompare(a.last_message_date);
-    } else if (a.last_message_date) {
-      return -1;
-    } else if (b.last_message_date) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
-});
-
-const filteredConversations = computed<Conversation[]>(() => {
-  return sortedConversations.value.filter((conversation) => {
-    const searchTerm = search.value.toLocaleLowerCase();
-    return (
-      conversation.name.toLowerCase().includes(searchTerm) ||
-      conversation.email?.toLowerCase().includes(searchTerm)
-    );
-  });
-});
-
-// conversation sélectionnée
-const selectedConversation = page.props.selectedConversation;
-
-// Utilisateurs connectés
-const onlineUsersObj = ref<Record<string, User>>({});
-
-/** Fonction qui détermine si un user est actuellement connecté */
-function isUserOnline(id: string): boolean {
-  return onlineUsersObj.value[id] ? true : false;
-}
-
-/**
- * Fonction pour rejoindre le canal 'online' et récupérer les utilisateurs connectés
- */
-function setupChannel() {
-  window.Echo.join('online')
-    .here((users: User[]) => {
-      const usersObj = Object.fromEntries(users.map((user) => [user.id, user]));
-      onlineUsersObj.value = usersObj;
-    })
-    .joining((user: User) => {
-      onlineUsersObj.value[user.id] = user;
-    })
-    .leaving((user: User) => {
-      delete onlineUsersObj.value[user.id];
-    })
-    .error((error: any) => {
-      console.error('Echo error', error);
-    });
-}
-
-/** Hook pour se connecter au canal */
 onMounted(() => {
-  setupChannel();
+  setSelectedConversation(page.props.selectedConversation);
+  setConversations(page.props.conversations);
 });
 
-/** Nettoyer le composant avant le démontage du composant */
-onBeforeUnmount(() => {
-  window.Echo.leave('online');
-});
+const { isUserOnline } = useOnlineUsers();
+const searchTerm = ref('');
 </script>
 
 <style scoped></style>
